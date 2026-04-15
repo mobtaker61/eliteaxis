@@ -107,6 +107,9 @@ return [
     'booking_requested_time' => 'الوقت المطلوب',
     'booking_submit' => 'حجز الخدمة',
     'booking_success' => 'تم إرسال طلب الحجز بنجاح. سيتواصل معك فريقنا قريبا.',
+    'booking_form_error' => 'يرجى مراجعة الحقول المحددة ثم المحاولة مرة أخرى.',
+    'booking_submit_failed' => 'تعذر إرسال الطلب حاليا. يرجى المحاولة مرة أخرى.',
+    'booking_modal_ok' => 'حسنا',
 
     'footer_address_title' => 'العنوان',
     'footer_opening_title' => 'ساعات العمل',

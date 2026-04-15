@@ -65,7 +65,7 @@ class ServiceBookingController extends Controller
         ]);
     }
 
-    public function __invoke(StoreServiceBookingRequest $request, string $locale): RedirectResponse
+    public function __invoke(StoreServiceBookingRequest $request, string $locale): RedirectResponse|JsonResponse
     {
         $data = $request->validated();
 
@@ -105,8 +105,14 @@ class ServiceBookingController extends Controller
             ]);
         }
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => __('site.booking_success'),
+            ]);
+        }
+
         return redirect()
-            ->to(route('home', ['locale' => $locale]).'#contact')
+            ->to(route('home', ['locale' => $locale]).'#reservation')
             ->with('booking_success', __('site.booking_success'));
     }
 

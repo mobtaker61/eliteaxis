@@ -28,6 +28,7 @@ Thumbs.db
 // Build files
 /public/build
 /public/hot
+/public/storage
 
 0-DOCS
 

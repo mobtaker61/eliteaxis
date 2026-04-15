@@ -197,9 +197,24 @@
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <h4 class="mb-4">{{ __('site.booking_intro') }}</h4>
 
-                        @if (session('booking_success'))
-                            <div class="alert alert-success">{{ session('booking_success') }}</div>
-                        @endif
+                        <div class="modal fade" id="bookingSuccessModal" tabindex="-1" aria-labelledby="bookingSuccessModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0 pb-0">
+                                        <h5 class="modal-title" id="bookingSuccessModalLabel">{{ __('site.booking_submit') }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body pt-2">
+                                        <p class="mb-0" id="bookingSuccessMessage">{{ session('booking_success', __('site.booking_success')) }}</p>
+                                    </div>
+                                    <div class="modal-footer border-0 pt-0">
+                                        <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">{{ __('site.booking_modal_ok') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="booking-form-feedback" class="alert d-none" role="alert"></div>
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -232,7 +247,7 @@
                                         </div>
                                     </div>
                                     <div id="whatsapp-preview" class="small fw-semibold text-primary mt-1 d-none"></div>
-                                    <div id="customer-lookup-message" class="small mt-1"></div>
+                                    <div id="customer-lookup-message" class="small mt-1 d-none"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -251,13 +266,13 @@
                                         <label for="car_make">{{ __('site.booking_make') }}</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-6 col-md-4">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="car_model" name="car_model" value="{{ old('car_model') }}" placeholder="{{ __('site.booking_model') }}">
                                         <label for="car_model">{{ __('site.booking_model') }}</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-6 col-md-4">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" id="car_year" name="car_year" value="{{ old('car_year') }}" placeholder="{{ __('site.booking_year') }}" min="1980" max="{{ date('Y') + 1 }}">
                                         <label for="car_year">{{ __('site.booking_year') }}</label>
@@ -294,13 +309,13 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-6">
                                     <div class="form-floating">
                                         <input type="date" class="form-control" id="requested_date" name="requested_date" value="{{ old('requested_date') }}" min="{{ now()->toDateString() }}">
                                         <label for="requested_date">{{ __('site.booking_requested_date') }}</label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-6">
                                     <div class="form-floating">
                                         <input type="time" class="form-control" id="requested_time" name="requested_time" value="{{ old('requested_time') }}">
                                         <label for="requested_time">{{ __('site.booking_requested_time') }}</label>
@@ -359,14 +374,19 @@
             const carMakeInput = document.getElementById('car_make');
             const carModelInput = document.getElementById('car_model');
             const carYearInput = document.getElementById('car_year');
-            const serviceCheckboxes = Array.from(document.querySelectorAll('input[name="service_ids[]"]'));
-            const previewLabel = @json(__('site.booking_whatsapp_preview_label'));
             const invalidMessage = @json(__('site.booking_whatsapp_invalid'));
             const customerFoundText = @json(__('site.booking_customer_found'));
             const customerNotFoundText = @json(__('site.booking_customer_not_found'));
+            const formErrorText = @json(__('site.booking_form_error'));
+            const submitFailedText = @json(__('site.booking_submit_failed'));
+            const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+            const formFeedback = document.getElementById('booking-form-feedback');
+            const successModalElement = document.getElementById('bookingSuccessModal');
+            const successModalMessage = document.getElementById('bookingSuccessMessage');
 
             let lookupTimer = null;
             let lastLookupDigits = '';
+            let isSubmitting = false;
 
             if (!input || !preview || !form) {
                 return;
@@ -375,7 +395,24 @@
             const setLookupMessage = (text, type) => {
                 if (!lookupMessage) return;
                 lookupMessage.textContent = text || '';
-                lookupMessage.className = `small mt-1 ${type === 'success' ? 'text-success' : type === 'error' ? 'text-danger' : 'text-muted'}`;
+                lookupMessage.className = `small mt-1 d-none ${type === 'success' ? 'text-success' : type === 'error' ? 'text-danger' : 'text-muted'}`;
+            };
+
+            const setFormFeedback = (messages, type = 'danger') => {
+                if (!formFeedback) return;
+
+                if (!Array.isArray(messages) || messages.length === 0) {
+                    formFeedback.className = 'alert d-none';
+                    formFeedback.innerHTML = '';
+                    return;
+                }
+
+                const items = messages
+                    .map((message) => `<li>${message}</li>`)
+                    .join('');
+
+                formFeedback.className = `alert alert-${type}`;
+                formFeedback.innerHTML = `<ul class="mb-0">${items}</ul>`;
             };
 
             const ensureCarMakeOption = (value) => {
@@ -388,14 +425,6 @@
                     carMakeInput.appendChild(option);
                 }
                 carMakeInput.value = value;
-            };
-
-            const applyServices = (ids) => {
-                if (!Array.isArray(ids)) return;
-                const lookupSet = new Set(ids.map((id) => Number(id)));
-                serviceCheckboxes.forEach((checkbox) => {
-                    checkbox.checked = lookupSet.has(Number(checkbox.value));
-                });
             };
 
             const runLookup = (digits) => {
@@ -437,7 +466,6 @@
                             carYearInput.value = data.vehicle.car_year;
                         }
                         ensureCarMakeOption(data.vehicle?.car_make);
-                        applyServices(data.service_ids);
                         setLookupMessage(customerFoundText, 'success');
                     })
                     .catch(() => {
@@ -458,9 +486,8 @@
                 digits = digits.slice(0, 9);
                 input.value = digits;
 
-                const finalNumber = '+971' + digits;
-                preview.textContent = digits.length ? `${previewLabel} ${finalNumber}` : '';
-                preview.classList.toggle('d-none', !digits.length);
+                preview.textContent = '';
+                preview.classList.add('d-none');
 
                 const valid = /^5\d{8}$/.test(digits);
                 if (digits.length > 0 && !valid) {
@@ -480,9 +507,87 @@
                 }
             };
 
+            const showSuccessPopup = (message) => {
+                if (!successModalElement || !window.bootstrap || !window.bootstrap.Modal) {
+                    setFormFeedback([message], 'success');
+                    return;
+                }
+
+                if (successModalMessage) {
+                    successModalMessage.textContent = message;
+                }
+
+                const successModal = window.bootstrap.Modal.getInstance(successModalElement)
+                    || new window.bootstrap.Modal(successModalElement);
+                successModal.show();
+            };
+
+            const submitBooking = async (event) => {
+                event.preventDefault();
+                render();
+                setFormFeedback([]);
+
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    setFormFeedback([formErrorText], 'danger');
+                    return;
+                }
+
+                if (isSubmitting) {
+                    return;
+                }
+
+                isSubmitting = true;
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                    });
+
+                    const payload = await response.json().catch(() => ({}));
+
+                    if (!response.ok) {
+                        if (response.status === 422) {
+                            const errors = Object.values(payload.errors ?? {}).flat();
+                            setFormFeedback(errors.length ? errors : [formErrorText], 'danger');
+                            return;
+                        }
+
+                        throw new Error(payload.message || submitFailedText);
+                    }
+
+                    setFormFeedback([]);
+                    form.reset();
+                    lastLookupDigits = '';
+                    setLookupMessage('', 'neutral');
+                    render();
+                    showSuccessPopup(payload.message || @json(__('site.booking_success')));
+                } catch (error) {
+                    const message = error instanceof Error ? error.message : submitFailedText;
+                    setFormFeedback([message], 'danger');
+                } finally {
+                    isSubmitting = false;
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                    }
+                }
+            };
+
             input.addEventListener('input', render);
-            form.addEventListener('submit', render);
+            form.addEventListener('submit', submitBooking);
             render();
+
+            @if (session('booking_success'))
+                showSuccessPopup(@json(session('booking_success')));
+            @endif
         })();
     </script>
 @endsection

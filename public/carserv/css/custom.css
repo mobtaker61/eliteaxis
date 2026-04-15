@@ -179,9 +179,15 @@ html[dir="rtl"] .navbar-light .navbar-nav .nav-link {
     }
 
     .navbar-light a.btn.book-service-btn {
-        height: 56px;
-        min-width: 132px;
-        padding: 0 12px !important;
+        height: 44px;
+        width: clamp(98px, 34vw, 128px);
+        max-width: clamp(98px, 34vw, 128px);
+        min-width: clamp(98px, 34vw, 128px);
+        padding: 0 10px !important;
+        font-size: clamp(11px, 2.9vw, 12px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .booking-services-selector {

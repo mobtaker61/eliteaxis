@@ -53,7 +53,24 @@ class StoreServiceBookingRequest extends FormRequest
             'service_ids' => ['required', 'array', 'min:1'],
             'service_ids.*' => ['required', 'integer', 'exists:services,id'],
             'requested_date' => ['required', 'date', 'after_or_equal:today'],
-            'requested_time' => ['required', 'date_format:H:i'],
+            'requested_time' => [
+                'required',
+                'date_format:H:i',
+                static function (string $attribute, mixed $value, \Closure $fail): void {
+                    if (! is_string($value) || ! preg_match('/^\d{2}:\d{2}$/', $value)) {
+                        return;
+                    }
+
+                    [$hours, $minutes] = array_map('intval', explode(':', $value));
+                    $totalMinutes = ($hours * 60) + $minutes;
+                    $startMinutes = 10 * 60; // 10:00
+                    $endMinutes = 17 * 60;   // 17:00
+
+                    if ($totalMinutes < $startMinutes || $totalMinutes > $endMinutes) {
+                        $fail(__('site.booking_time_range_error'));
+                    }
+                },
+            ],
         ];
     }
 

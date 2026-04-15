@@ -317,7 +317,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating">
-                                        <input type="time" class="form-control" id="requested_time" name="requested_time" value="{{ old('requested_time') }}">
+                                        <input type="time" class="form-control" id="requested_time" name="requested_time" value="{{ old('requested_time') }}" min="10:00" max="17:00">
                                         <label for="requested_time">{{ __('site.booking_requested_time') }}</label>
                                     </div>
                                 </div>

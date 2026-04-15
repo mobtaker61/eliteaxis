@@ -107,6 +107,7 @@ return [
     'booking_requested_time' => 'Requested Time',
     'booking_submit' => 'Book Service',
     'booking_success' => 'Your booking request was submitted successfully. We will contact you shortly.',
+    'booking_time_range_error' => 'Please choose a time between 10:00 AM and 5:00 PM.',
     'booking_form_error' => 'Please review the highlighted fields and try again.',
     'booking_submit_failed' => 'Unable to submit your request right now. Please try again.',
     'booking_modal_ok' => 'OK',

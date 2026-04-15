@@ -107,6 +107,7 @@ return [
     'booking_requested_time' => 'الوقت المطلوب',
     'booking_submit' => 'حجز الخدمة',
     'booking_success' => 'تم إرسال طلب الحجز بنجاح. سيتواصل معك فريقنا قريبا.',
+    'booking_time_range_error' => 'يرجى اختيار وقت بين 10:00 صباحا و 5:00 مساء.',
     'booking_form_error' => 'يرجى مراجعة الحقول المحددة ثم المحاولة مرة أخرى.',
     'booking_submit_failed' => 'تعذر إرسال الطلب حاليا. يرجى المحاولة مرة أخرى.',
     'booking_modal_ok' => 'حسنا',

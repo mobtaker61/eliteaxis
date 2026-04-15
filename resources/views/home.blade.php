@@ -214,18 +214,6 @@
                             </div>
                         </div>
 
-                        <div id="booking-form-feedback" class="alert d-none" role="alert"></div>
-
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                         <form method="POST"
                             action="{{ route('book-service.store', ['locale' => app()->getLocale()]) }}"
                             data-customer-lookup-url="{{ route('book-service.lookup', ['locale' => app()->getLocale()]) }}">
@@ -323,6 +311,19 @@
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">{{ __('site.booking_submit') }}</button>
+                                </div>
+                                <div class="col-12">
+                                    <div id="booking-form-feedback" class="alert d-none mb-0" role="alert"></div>
+
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger mb-0">
+                                            <ul class="mb-0">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </form>

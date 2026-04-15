@@ -251,13 +251,13 @@
                                         <label for="car_make">{{ __('site.booking_make') }}</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="car_model" name="car_model" value="{{ old('car_model') }}" placeholder="{{ __('site.booking_model') }}">
                                         <label for="car_model">{{ __('site.booking_model') }}</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-6">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" id="car_year" name="car_year" value="{{ old('car_year') }}" placeholder="{{ __('site.booking_year') }}" min="1980" max="{{ date('Y') + 1 }}">
                                         <label for="car_year">{{ __('site.booking_year') }}</label>

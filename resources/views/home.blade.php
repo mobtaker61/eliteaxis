@@ -188,7 +188,10 @@
             </div>
             <div class="row g-4">
                 <div class="col-md-4 wow fadeIn" data-wow-delay="0.1s">
-                    <img class="img-fluid rounded w-100 h-100" src="{{ asset('carserv/img/reservation.jpg') }}" style="object-fit: cover; min-height: 350px;" alt="Reservation">
+                    <picture>
+                        <source media="(max-width: 991.98px)" srcset="{{ asset('carserv/img/reservation-mobile.jpg') }}">
+                        <img class="img-fluid rounded w-100 h-100" src="{{ asset('carserv/img/reservation.jpg') }}" style="object-fit: cover; min-height: 50px;" alt="Reservation">
+                    </picture>
                 </div>
                 <div class="col-md-8">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">

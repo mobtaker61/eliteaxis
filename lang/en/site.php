@@ -6,13 +6,16 @@ return [
     'meta_description' => 'Elite Axis in Dubai provides professional auto repair and maintenance services.',
     'brand' => 'Elite Axis',
 
-    'topbar_address' => 'Al Quoz Industrial Area, Dubai, UAE',
+    'topbar_address' => '33, 14B St., Al Khabaisi, Deira, Dubai, UAE',
     'topbar_hours' => 'Mon - Sat : 08.00 AM - 08.00 PM',
-    'topbar_phone' => '+971 4 000 0000',
+    'topbar_phone' => '+971 50 704 8535',
+    'topbar_whatsapp' => '+971 50 982 1093',
+    'topbar_whatsapp_link' => 'https://wa.me/971509821093',
 
     'nav_home' => 'Home',
     'nav_about' => 'About',
     'nav_services' => 'Service',
+    'nav_blog' => 'Blog',
     'nav_contact' => 'Contact',
     'nav_book' => 'Book Service',
 
@@ -65,6 +68,12 @@ return [
     'service_4_p2' => 'Fast turnaround',
     'service_4_p3' => 'Engine longevity',
 
+    'reservation_tag' => '// Reservations //',
+    'reservation_title' => 'Reservations',
+
+    'blog_tag' => '// Blog //',
+    'blog_title' => 'Blog',
+
     'contact_tag' => '// Contact Us //',
     'contact_title' => 'Contact For Any Query',
     'contact_booking' => '// Booking //',
@@ -114,6 +123,7 @@ return [
     'footer_support' => 'Support',
     'footer_help' => 'Help',
     'footer_faqs' => 'FAQs',
+    'footer_developer' => 'Web Development by ',
 
     'language_en' => 'English',
     'language_ar' => 'Arabic',

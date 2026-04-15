@@ -176,35 +176,13 @@
         </div>
     </div>
 
-    <div id="contact" class="container-xxl py-5">
+    <div id="reservation" class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="text-primary text-uppercase">{{ __('site.contact_tag') }}</h6>
-                <h1 class="mb-5">{{ __('site.contact_title') }}</h1>
+                <h6 class="text-primary text-uppercase">{{ __('site.reservation_tag') }}</h6>
+                <h1 class="mb-5">{{ __('site.reservation_title') }}</h1>
             </div>
             <div class="row g-4">
-                <div class="col-12">
-                    <div class="row gy-4">
-                        <div class="col-md-4">
-                            <div class="bg-light d-flex flex-column justify-content-center p-4">
-                                <h5 class="text-uppercase">{{ __('site.contact_booking') }}</h5>
-                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>{{ __('site.contact_booking_email') }}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="bg-light d-flex flex-column justify-content-center p-4">
-                                <h5 class="text-uppercase">{{ __('site.contact_general') }}</h5>
-                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>{{ __('site.contact_general_email') }}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="bg-light d-flex flex-column justify-content-center p-4">
-                                <h5 class="text-uppercase">{{ __('site.contact_technical') }}</h5>
-                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>{{ __('site.contact_technical_email') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-4 wow fadeIn" data-wow-delay="0.1s">
                     <img class="img-fluid rounded w-100 h-100" src="{{ asset('carserv/img/reservation.jpg') }}" style="object-fit: cover; min-height: 350px;" alt="Reservation">
                 </div>
@@ -326,6 +304,38 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="blog" class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="text-primary text-uppercase">{{ __('site.blog_tag') }}</h6>
+                <h1 class="mb-5">{{ __('site.blog_title') }}</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="row gy-4">
+                        <div class="col-md-4">
+                            <div class="bg-light d-flex flex-column justify-content-center p-4">
+                                <h5 class="text-uppercase">{{ __('site.contact_booking') }}</h5>
+                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>{{ __('site.contact_booking_email') }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="bg-light d-flex flex-column justify-content-center p-4">
+                                <h5 class="text-uppercase">{{ __('site.contact_general') }}</h5>
+                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>{{ __('site.contact_general_email') }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="bg-light d-flex flex-column justify-content-center p-4">
+                                <h5 class="text-uppercase">{{ __('site.contact_technical') }}</h5>
+                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>{{ __('site.contact_technical_email') }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

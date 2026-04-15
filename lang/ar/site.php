@@ -6,13 +6,16 @@ return [
     'meta_description' => 'إيليت أكسس في دبي يقدم خدمات صيانة وإصلاح سيارات باحترافية عالية.',
     'brand' => 'Elite Axis',
 
-    'topbar_address' => 'منطقة القوز الصناعية، دبي، الإمارات',
+    'topbar_address' => '33, 14B St., Al Khabaisi, Deira, Dubai, UAE',
     'topbar_hours' => 'الاثنين - السبت : 08:00 ص - 08:00 م',
-    'topbar_phone' => '+971 4 000 0000',
+    'topbar_phone' => '+971 50 704 8535',
+    'topbar_whatsapp' => '+971 50 982 1093',
+    'topbar_whatsapp_link' => 'https://wa.me/971509821093',
 
     'nav_home' => 'الرئيسية',
     'nav_about' => 'من نحن',
     'nav_services' => 'الخدمات',
+    'nav_blog' => 'المدونة',
     'nav_contact' => 'تواصل معنا',
     'nav_book' => 'احجز خدمة',
 
@@ -65,6 +68,12 @@ return [
     'service_4_p2' => 'إنجاز سريع',
     'service_4_p3' => 'إطالة عمر المحرك',
 
+    'reservation_tag' => '// الحجوزات //',
+    'reservation_title' => 'الحجوزات',
+
+    'blog_tag' => '// المدونة //',
+    'blog_title' => 'المدونة',
+
     'contact_tag' => '// تواصل معنا //',
     'contact_title' => 'تواصل معنا لأي استفسار',
     'contact_booking' => '// الحجوزات //',
@@ -114,6 +123,7 @@ return [
     'footer_support' => 'الدعم',
     'footer_help' => 'المساعدة',
     'footer_faqs' => 'الأسئلة الشائعة',
+    'footer_developer' => 'تطوير الويب بواسطة ',
 
     'language_en' => 'English',
     'language_ar' => 'العربية',

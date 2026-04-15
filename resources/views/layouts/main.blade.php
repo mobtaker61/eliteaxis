@@ -48,14 +48,11 @@
             </div>
             <div class="col-lg-5 px-5 text-end">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
-                    <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>{{ __('site.topbar_phone') }}</small>
+                    <small class="fab fa-whatsapp text-primary me-2"></small>
+                    <small><a href="{{ __('site.topbar_whatsapp_link') }}">{{ __('site.topbar_whatsapp') }}</a></small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square bg-white text-primary me-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square bg-white text-primary me-1" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square bg-white text-primary me-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square bg-white text-primary me-0" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-sm-square bg-white text-primary me-0" href="https://www.instagram.com/elite_axis.ae/"><i class="fab fa-instagram"></i></a>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center ms-3">
                     <a class="text-dark small fw-bold me-2" href="{{ route('home', ['locale' => 'en']) }}">{{ __('site.language_en') }}</a>
@@ -75,30 +72,33 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="nav-item nav-link @yield('nav_home', 'active')">{{ __('site.nav_home') }}</a>
-                <a href="#about" class="nav-item nav-link">{{ __('site.nav_about') }}</a>
                 <a href="#services" class="nav-item nav-link">{{ __('site.nav_services') }}</a>
+                <a href="#blog" class="nav-item nav-link">{{ __('site.nav_blog') }}</a>
+                <a href="#about" class="nav-item nav-link">{{ __('site.nav_about') }}</a>
                 <a href="#contact" class="nav-item nav-link">{{ __('site.nav_contact') }}</a>
             </div>
-            <a href="#contact" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">{{ __('site.nav_book') }}<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="#reservation" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">{{ __('site.nav_book') }}<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
 
     @yield('content')
 
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
+        <div class="container py-5" id="contact">
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-light mb-4">{{ __('site.footer_address_title') }}</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{ __('site.topbar_address') }}</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>{{ __('site.topbar_phone') }}</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>{{ __('site.contact_general_email') }}</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><a href="https://maps.app.goo.gl/bni7tTbRN394nurP8" target="_blank">{{ __('site.topbar_address') }}</a></p>
+                    <p class="mb-2"><i class="fab fa-whatsapp me-3"></i><a href="{{ __('site.topbar_whatsapp_link') }}">{{ __('site.topbar_whatsapp') }}</a></p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a href="tel:{{ __('site.topbar_phone') }}">{{ __('site.topbar_phone') }}</a></p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="mailto:{{ __('site.contact_general_email') }}">{{ __('site.contact_general_email') }}</a></p>
                     <div class="d-flex pt-2">
+                        {{--
                         <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        --}}
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/elite_axis.ae/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6">
@@ -119,14 +119,14 @@
                     <iframe class="position-relative rounded w-100 h-100"
                     src="https://www.google.com/maps?q=Al%20Quoz%20Dubai&output=embed"
                     frameborder="0" style="min-height: 150px; border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-{{--
+                    {{--
                     <h4 class="text-light mb-4">{{ __('site.footer_newsletter_title') }}</h4>
                     <p>{{ __('site.footer_newsletter_text') }}</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="{{ __('site.footer_newsletter_placeholder') }}">
                         <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">{{ __('site.footer_newsletter_button') }}</button>
                     </div>
- --}}
+                    --}}
                 </div>
             </div>
         </div>
@@ -134,15 +134,18 @@
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="{{ route('home', ['locale' => app()->getLocale()]) }}">{{ __('site.brand') }}</a>, {{ __('site.footer_rights') }}
+                        &copy; <a class="border-bottom" href="{{ route('home', ['locale' => app()->getLocale()]) }}">{{ __('site.brand') }}</a>, {{ __('site.footer_rights') }} {{ date('Y') }}
                     </div>
-                    <div class="col-md-6 text-center text-md-end">
+                    <div class="col-md-6 text-md-end">
+                            {{ __('site.footer_developer') }} <a href="https://wa.me/971522299108" target="_blank">Roni Plus</a>
+                        {{--
                         <div class="footer-menu">
                             <a href="{{ route('home', ['locale' => app()->getLocale()]) }}">{{ __('site.nav_home') }}</a>
                             <a href="#contact">{{ __('site.footer_support') }}</a>
                             <a href="#contact">{{ __('site.footer_help') }}</a>
                             <a href="#contact">{{ __('site.footer_faqs') }}</a>
                         </div>
+                        --}}
                     </div>
                 </div>
             </div>

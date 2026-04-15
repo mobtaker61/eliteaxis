@@ -127,4 +127,6 @@ return [
 
     'language_en' => 'English',
     'language_ar' => 'العربية',
+    'language_en_flag' => '🇺🇸',
+    'language_ar_flag' => '🇦🇪',
 ];

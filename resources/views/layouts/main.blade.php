@@ -16,6 +16,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" rel="stylesheet">
 
     <link href="{{ asset('carserv/lib/animate/animate.min.css') }}" rel="stylesheet">
     @if (app()->getLocale() === 'ar')
@@ -49,35 +50,83 @@
             <div class="col-lg-5 px-5 text-end">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fab fa-whatsapp text-primary me-2"></small>
-                    <small><a href="{{ __('site.topbar_whatsapp_link') }}">{{ __('site.topbar_whatsapp') }}</a></small>
+                    <small><a class="text-reset" href="{{ __('site.topbar_whatsapp_link') }}">{{ __('site.topbar_whatsapp') }}</a></small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <a class="btn btn-sm-square bg-white text-primary me-0" href="https://www.instagram.com/elite_axis.ae/"><i class="fab fa-instagram"></i></a>
-                </div>
-                <div class="h-100 d-inline-flex align-items-center ms-3">
-                    <a class="text-dark small fw-bold me-2" href="{{ route('home', ['locale' => 'en']) }}">{{ __('site.language_en') }}</a>
-                    <span class="small text-muted">|</span>
-                    <a class="text-dark small fw-bold ms-2" href="{{ route('home', ['locale' => 'ar']) }}">{{ __('site.language_ar') }}</a>
                 </div>
             </div>
         </div>
     </div>
 
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        @php
+            $currentLocale = app()->getLocale();
+            $currentFlagCode = $currentLocale === 'ar' ? 'ae' : 'us';
+        @endphp
         <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <img src="{{ asset('img/Elite_axis_logo.png') }}" alt="{{ __('site.brand') }}" class="brand-logo">
         </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center ms-auto pe-4 d-lg-none">
+            <div class="dropdown lang-switcher-dropdown me-2">
+                <button class="btn btn-sm btn-link nav-link dropdown-toggle lang-switcher-toggle" type="button" id="mobileLanguageSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="fi fi-{{ $currentFlagCode }} lang-flag-icon" aria-hidden="true"></span>                  
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="mobileLanguageSwitcher">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2 lang-switcher-link {{ $currentLocale === 'en' ? 'active' : '' }}"
+                            href="{{ route('home', ['locale' => 'en']) }}"
+                            data-base-url="{{ route('home', ['locale' => 'en']) }}">
+                            <span class="fi fi-us lang-flag-icon" aria-hidden="true"></span>
+                            <span>{{ __('site.language_en') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2 lang-switcher-link {{ $currentLocale === 'ar' ? 'active' : '' }}"
+                            href="{{ route('home', ['locale' => 'ar']) }}"
+                            data-base-url="{{ route('home', ['locale' => 'ar']) }}">
+                            <span class="fi fi-ae lang-flag-icon" aria-hidden="true"></span>
+                            <span>{{ __('site.language_ar') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="navbar-toggler d-none" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-hidden="true" tabindex="-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="#reservation" class="btn btn-primary btn-sm py-2 px-3 book-service-btn">{{ __('site.nav_book') }}</a>
+        </div>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="#services" class="nav-item nav-link">{{ __('site.nav_services') }}</a>
                 <a href="#blog" class="nav-item nav-link">{{ __('site.nav_blog') }}</a>
                 <a href="#about" class="nav-item nav-link">{{ __('site.nav_about') }}</a>
                 <a href="#contact" class="nav-item nav-link">{{ __('site.nav_contact') }}</a>
+                <div class="nav-item dropdown lang-switcher-dropdown d-none d-lg-block">
+                    <a href="#" class="nav-link dropdown-toggle d-flex align-items-center lang-switcher-toggle" id="desktopLanguageSwitcher" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="fi fi-{{ $currentFlagCode }} lang-flag-icon" aria-hidden="true"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm m-0" aria-labelledby="desktopLanguageSwitcher">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-2 lang-switcher-link {{ $currentLocale === 'en' ? 'active' : '' }}"
+                                href="{{ route('home', ['locale' => 'en']) }}"
+                                data-base-url="{{ route('home', ['locale' => 'en']) }}">
+                                <span class="fi fi-us lang-flag-icon" aria-hidden="true"></span>
+                                <span>{{ __('site.language_en') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-2 lang-switcher-link {{ $currentLocale === 'ar' ? 'active' : '' }}"
+                                href="{{ route('home', ['locale' => 'ar']) }}"
+                                data-base-url="{{ route('home', ['locale' => 'ar']) }}">
+                                <span class="fi fi-ae lang-flag-icon" aria-hidden="true"></span>
+                                <span>{{ __('site.language_ar') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <a href="#reservation" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">{{ __('site.nav_book') }}<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="#reservation" class="btn btn-primary py-4 px-lg-5 d-none d-lg-flex book-service-btn">{{ __('site.nav_book') }}</a>
         </div>
     </nav>
 
@@ -88,10 +137,10 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-light mb-4">{{ __('site.footer_address_title') }}</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><a href="https://maps.app.goo.gl/bni7tTbRN394nurP8" target="_blank">{{ __('site.topbar_address') }}</a></p>
-                    <p class="mb-2"><i class="fab fa-whatsapp me-3"></i><a href="{{ __('site.topbar_whatsapp_link') }}">{{ __('site.topbar_whatsapp') }}</a></p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a href="tel:{{ __('site.topbar_phone') }}">{{ __('site.topbar_phone') }}</a></p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="mailto:{{ __('site.contact_general_email') }}">{{ __('site.contact_general_email') }}</a></p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><a class="text-reset" href="https://maps.app.goo.gl/bni7tTbRN394nurP8" target="_blank">{{ __('site.topbar_address') }}</a></p>
+                    <p class="mb-2"><i class="fab fa-whatsapp me-3"></i><a class="text-reset" href="{{ __('site.topbar_whatsapp_link') }}">{{ __('site.topbar_whatsapp') }}</a></p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a class="text-reset" href="tel:{{ __('site.topbar_phone') }}">{{ __('site.topbar_phone') }}</a></p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><a class="text-reset" href="mailto:{{ __('site.contact_general_email') }}">{{ __('site.contact_general_email') }}</a></p>
                     <div class="d-flex pt-2">
                         {{--
                         <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
@@ -159,6 +208,24 @@
     <script src="{{ asset('carserv/lib/wow/wow.min.js') }}"></script>
     <script src="{{ asset('carserv/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('carserv/lib/waypoints/waypoints.min.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const langLinks = document.querySelectorAll('.lang-switcher-link');
+
+            const syncLangLinksWithHash = () => {
+                const currentHash = window.location.hash || '';
+                langLinks.forEach((link) => {
+                    const baseUrl = link.getAttribute('data-base-url');
+                    if (baseUrl) {
+                        link.setAttribute('href', `${baseUrl}${currentHash}`);
+                    }
+                });
+            };
+
+            syncLangLinksWithHash();
+            window.addEventListener('hashchange', syncLangLinksWithHash);
+        });
+    </script>
     <script src="{{ asset('carserv/js/main.js') }}"></script>
 </body>
 

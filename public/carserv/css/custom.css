@@ -110,6 +110,48 @@ body {
     background: var(--primary);
 }
 
+.lang-switcher-dropdown .lang-switcher-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: #1d1d1d;
+    text-decoration: none;
+    border: 0;
+    background: transparent;
+}
+
+.lang-switcher-dropdown .lang-switcher-toggle:hover,
+.lang-switcher-dropdown .lang-switcher-toggle:focus {
+    color: var(--primary);
+}
+
+.lang-flag-icon {
+    width: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.lang-switcher-dropdown .lang-code {
+    font-size: 13px;
+    letter-spacing: 0.02em;
+}
+
+.lang-switcher-dropdown .dropdown-item.active,
+.lang-switcher-dropdown .dropdown-item:active {
+    background-color: rgba(0, 49, 105, 0.12);
+    color: var(--primary);
+}
+
+.navbar-light a.btn.book-service-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    white-space: normal;
+}
+
 .footer .btn.btn-link::before {
     color: var(--secondary);
 }
@@ -130,6 +172,16 @@ html[dir="rtl"] .navbar-light .navbar-nav .nav-link {
 @media (max-width: 991.98px) {
     .brand-logo {
         height: 44px;
+    }
+
+    .lang-switcher-dropdown .lang-switcher-toggle {
+        padding: 0;
+    }
+
+    .navbar-light a.btn.book-service-btn {
+        height: 56px;
+        min-width: 132px;
+        padding: 0 12px !important;
     }
 
     .booking-services-selector {

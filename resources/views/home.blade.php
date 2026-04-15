@@ -117,24 +117,28 @@
                 <h1 class="mb-5">{{ __('site.services_title') }}</h1>
             </div>
             <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-lg-4">
-                    <div class="nav w-100 nav-pills me-4">
+                <div class="col-lg-4"> <!-- services navigation -->
+                    <ul class="nav nav-pills row g-3 w-100 me-lg-4 list-unstyled mb-0">
                         @forelse ($services as $service)
-                            <button class="nav-link w-100 d-flex align-items-center text-start p-4 {{ $loop->last ? 'mb-0' : 'mb-4' }} {{ $loop->first ? 'active' : '' }}"
-                                data-bs-toggle="pill"
-                                data-bs-target="#tab-pane-{{ $service->id }}"
-                                type="button">
-                                <i class="{{ $service->icon ?? 'fa fa-cog' }} fa-2x me-3"></i>
-                                <h4 class="m-0">{{ $service->translate('name') }}</h4>
-                            </button>
+                            <li class="col-4 nav-item">
+                                <button class="nav-link w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-3 {{ $loop->first ? 'active' : '' }}"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#tab-pane-{{ $service->id }}"
+                                    type="button">
+                                    <i class="{{ $service->icon ?? 'fa fa-cog' }} fa-2x mb-2"></i>
+                                    <h6 class="m-0">{{ $service->translate('name') }}</h6>
+                                </button>
+                            </li>
                         @empty
-                            <div class="bg-light p-4">
-                                <p class="mb-0">{{ __('site.no_services') }}</p>
-                            </div>
+                            <li class="col-12">
+                                <div class="bg-light p-4">
+                                    <p class="mb-0">{{ __('site.no_services') }}</p>
+                                </div>
+                            </li>
                         @endforelse
-                    </div>
+                    </ul>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-8"> <!-- services content -->
                     <div class="tab-content w-100">
                         @forelse ($services as $service)
                             @php

@@ -18,7 +18,7 @@
                                     <a href="#services" class="btn btn-primary py-3 px-5 animated slideInDown">{{ __('site.hero_cta_1') }}<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                    <img class="img-fluid" src="{{ asset('carserv/img/carousel-1.png') }}" alt="">
+                                    <img class="img-fluid" hidden src="{{ asset('carserv/img/carousel-1.png') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                     <a href="#contact" class="btn btn-primary py-3 px-5 animated slideInDown">{{ __('site.hero_cta_2') }}<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                    <img class="img-fluid" src="{{ asset('carserv/img/carousel-2.png') }}" alt="">
+                                    <img class="img-fluid" hidden src="{{ asset('carserv/img/carousel-2.png') }}" alt="">
                                 </div>
                             </div>
                         </div>
